@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid" id="role" style=" display: none; ">
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+	
+	<div class="col-xl-6 col-lg-6">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Chuyển nhân vật</h6> </div>
+         <div class="card-body">
+			<form method="post">
+				 
+				
+ 
+				    <div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="admin_name" class="ant-form-item-required"  >Nhập tên tài khoản nhân vật cần chuyển
+							<!---->
+						</label>
+					</div>
+					<input type="text"  class="form-control form-control-user" id="admin_name" name="admin_name" required=""  >
+					</div>
+					
+					 		 
+					
+				    <div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="password2" class="ant-form-item-required" title="Mật khẩu cấp 2">Mật khẩu cấp 2
+							<!---->
+						</label>
+					</div>
+					<input type="password" class="form-control form-control-user" required id="password2" name="password2">
+					</div>
+                       
+				<button type="submit" name="" class="btn btn-google btn-user btn-block"> Xác nhận </button>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+
+<script type="text/javascript">
+$('form').submit(function() {
+ 		var admin_name = $('#admin_name').val()
+ 		var chon = $('#chon').val()
+	 
+ 	 
+  
+
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_GET_NAME,{
+'name': $('[name=admin_name]').val()
+}, { headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+	showName = response.data.showName
+ 			for (i = 0; i < showName.length; i++) {
+ 				item = showName[i]
+ 
+ 				 if (item['is_online'] == 1)
+				 {
+				 Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Tài khoản này đang online không thể thực hiện. !!!'
+ 			})
+                   return false
+				 }
+ 				 
+ 			}
+}else{
+	Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Không tìm thấy tài khoản !!!'
+ 			})
+return false
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_GET_NAME_S1,{
+'name': $('[name=admin_name]').val()
+}, { headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+	showName_S1 = response.data.showName_S1
+ 			for (i = 0; i < showName_S1.length; i++) {
+ 				item = showName_S1[i]
+             if (item['menpai'] == 0) {var monphai = "Thiếu Lâm"}
+             if (item['menpai'] == 1) {var monphai = "Minh Giáo"}
+             if (item['menpai'] == 2) {var monphai = "Cái Bang"}
+             if (item['menpai'] == 3) {var monphai = "Võ Ðang"}
+             if (item['menpai'] == 4) {var monphai = "Nga My"}
+             if (item['menpai'] == 5) {var monphai = "Tinh Túc"}
+             if (item['menpai'] == 6) {var monphai = "Thiên Long"}
+             if (item['menpai'] == 7) {var monphai = "Thiên Sơn"}
+             if (item['menpai'] == 8) {var monphai = "Tiêu Dao"}
+ 				<!-- $("#show_getname_s1").html(item['accname']); -->
+				<!-- $("#show_getname_id").html(item['id']); -->
+				<!-- $("#show_getname_email").html(item['email']); -->
+				<!-- $("#show_getname_coin").html(formatter.format(item['coin'])); -->
+				<!-- $("#show_getname_point").html(formatter.format(item['point'])); -->
+				
+				$('#showName_S1').append(`<option value="${item['aid']}">Tên nhân vật: ${item['charname']} - Level: ${item['level']} - Môn phái: ${monphai}</option>`)
+ 				 
+ 			}
+}else{
+	Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Không tìm thấy tài khoản !!!'
+ 			})
+return false
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: true
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Chọn nhân vật cần chuyển',
+  html: "<select id='showName_S1' name='aid' style='padding: 10px;'></select><br><span >Nhập tài khoản cần chuyển đến</span><br><input class='form-control' name='admin_name_to' id='admin_name_to' ><span><br><br><br>",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Xác nhận',
+  cancelButtonText: 'Hủy bỏ',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+
+
+//////////////////////////
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_ADMIN_SEND_FUN, {
+'admin_name': $('[name=admin_name]').val(),
+'admin_name_to': $('[name=admin_name_to]').val(),
+'aid': $('[name=aid]').val(),
+'password2': $('[name=password2]').val(),
+},
+{ headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+Swal.fire({
+position: 'top-center',
+icon: 'success',
+title: "" + response.data.msg + "",
+showConfirmButton: false,
+timer: 2000
+})
+setTimeout(function() {window.open('admin-send-fun-history.html', '_self')}, 2000);
+var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+data: {name: admin_name,password:'No',datetime:datetime,content: 'Chuyển nhân vật thành công từ Tài khoản='+admin_name+' '}});
+}
+else
+{
+Swal.fire({
+icon: 'error',
+title: 'Lỗi...',
+text: "" + response.data.msg + ""
+})
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+//////////////////////////
+
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    
+  }
+})
+
+return false
+})
+</script>
+</body>
+</html>

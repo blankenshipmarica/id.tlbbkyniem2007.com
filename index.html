@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Thông tin tài khoản</h6> </div>
+		<div class="card-body">
+			<p>Tên tài khoản: <span id="name2"></span>
+			</p>
+			<p>Email: *********<span id="email"></span>
+			</p>
+			<p>Bạc Web: <span id="coin2"></span>
+			</p>
+			<p>Bạc Game: <span id="point2"></span>
+			</p>
+			<p>Bạc Game Quy Đổi: <span id="point_quy_doi2"></span>
+			</p>
+			<p>Tổng Bạc đã đổi: <span id="tong"></span> (Đã bao gồm Khuyến Mãi)
+			</p>
+			<p>Ngày tạo: <span id="created"></span>
+			</p>
+			<p>Ngày cập nhật: <span id="updated"></span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="card shadow mb-4" id="role" style=" display: none; ">
+	<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Quản trị Game</h6> </div>
+				<div class="card-body">
+					 
+						
+<div class="login-inner-form">
+<div role="tabpanel" class="tab-pane active" id="left-1">
+<div class="row four-column" id="section02">
+
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder"><div class="margin-ten-bottom">
+<a href="admin-user.html" style=" color: #5c5c5c;text-decoration: none;"><img alt="" src="assets/img/icon-9.png" data-selector="img">
+</div>Quản lý tài khoản</div></a>
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder"><div class="margin-ten-bottom">
+<a href="admin-config.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img">
+</div>Cấu hình khuyến mãi</div></a>
+
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder" ><div class="margin-ten-bottom">
+<a href="admin-addcoin.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img"></div>Thêm Bạc</div></a>
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder" ><div class="margin-ten-bottom">
+<a href="admin-outcoin.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img"></div>Rút Bạc</div></a>
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder" ><div class="margin-ten-bottom">
+<a href="admin-fun.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img"></div>Nhân Vật</div></a>
+ 
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder" ><div class="margin-ten-bottom">
+<a href="admin-send-fun.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img"></div>Chuyển Nhân Vật</div></a> 
+
+<div class="col-md-2 col-sm-6 col-xs-12 text-center placeholder" ><div class="margin-ten-bottom">
+<a href="admin-send-fun-history.html" style=" color: #5c5c5c;text-decoration: none;">
+<img alt="" src="assets/img/icon-9.png" data-selector="img"></div>Lịch Sử Chuyển Nhân Vật</div></a>
+ 
+
+</div>
+</div>					
+</div>
+</div>
+                </div>
+				
+</div>
+<input type="hidden" class="form-control form-control-user" id="namec" name="namec" required="" readonly>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+</body>
+</html>

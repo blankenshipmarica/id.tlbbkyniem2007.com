@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid" id="role" style=" display: none; ">
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+	
+	<div class="col-xl-6 col-lg-6">
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Cấu hình khuyến mãi</h6> </div>
+         <div class="card-body">
+			<form method="post">
+				 
+				
+ 
+				<div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="tyle" class="ant-form-item-required"  >Tỷ lệ Khuyến mãi (KM 20% nhập số 20):
+							<!---->
+						</label>
+					</div>
+					<input type="number"  class="form-control form-control-user" id="tyle" name="tyle" required="" min = "1" max = "100">
+					</div>
+					
+					<div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="date" class="ant-form-item-required"  >Thời gian kết thúc khuyến mãi (VD: 2023-09-05)
+							<!---->
+						</label>
+					</div>
+					<input type="text"  class="form-control form-control-user"  id="date" name="date" required="" pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])">
+					</div>
+					
+					
+				    <div class="form-group">
+					<div class="ant-col ant-form-item-label">
+						<label for="password2" class="ant-form-item-required" title="Mật khẩu cấp 2">Mật khẩu cấp 2
+							<!---->
+						</label>
+					</div>
+					<input type="password" class="form-control form-control-user" required id="password2" name="password2">
+					</div>
+                       
+				<button type="submit" class="btn btn-google btn-user btn-block"> Xác nhận </button>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+
+<script type="text/javascript">
+axios.get(BASE_URL + API_AUTHEN + AUTHEN_CONFIG, { headers: { 'Authorization': localStorage.getItem("Authorization")} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+document.getElementById("tyle").value = response.data.tyle;
+document.getElementById("date").value = response.data.date;
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+ 
+ 	$('form').submit(function() {
+ 		var tyle = $('#tyle').val()
+	    var password2 = $('#password2').val()
+ 		var date = $('#date').val()
+ 		var z = tyle
+ 		if(!/^[0-9]+$/.test(z)){
+ 		Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Tỷ lệ phải lớn hơn 0 !!!'
+ 			})
+ 			return false
+ 		}
+ 		if (tyle < 0) {
+ 			Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Tỷ lệ phải lớn hơn 0 !!!'
+ 			})
+ 			return false
+ 		}
+//////////////////////////
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_ADMIN_CONFIG, {
+'tyle': $('[name=tyle]').val(),
+'date': $('[name=date]').val(),
+'password2': $('[name=password2]').val(),
+},
+{ headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+Swal.fire({
+position: 'top-center',
+icon: 'success',
+title: "" + response.data.msg + "",
+showConfirmButton: false,
+timer: 2000
+})
+setTimeout(function() {window.open('admin-config.html', '_self')}, 2000);
+var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+data: {name: 'No',password:'No',datetime:datetime,content: 'Cập nhật cấu hình khuyến mãi thành công Tỷ lệ='+tyle+',Date='+date+' '}});
+}
+else
+{
+Swal.fire({
+icon: 'error',
+title: 'Lỗi...',
+text: "" + response.data.msg + ""
+})
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+//////////////////////////
+return false
+})
+</script>
+</body>
+</html>

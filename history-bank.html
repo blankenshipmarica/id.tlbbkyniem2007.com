@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<meta http-equiv="refresh" content="30">
+    <title>Quản lý tài khoản TLBB</title>
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <my-head></my-head> 
+</head>
+<body id="page-top">
+    <div id="wrapper">
+      <my-sidebar></my-sidebar> 
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+<my-header></my-header> 
+ <!-- header -->
+<div class="container-fluid">
+
+                    <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+		           <h1 class="h3 mb-0 text-gray-800">Thông tin tài khoản</h1> </div>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+<div class="card-header py-3">
+<h6 class="m-0 font-weight-bold text-primary">Lịch sử chuyển khoản</h6>
+<div style=" float: right; ">
+<select class="form-control" name="telco" required="" onchange="if (this.value) window.location.href=this.value"  >
+<option id="showsize" value=""   ></option>
+<option value="?size=20">20</option>
+<option value="?size=50">50</option>
+<option value="?size=100">100</option>
+<option value="?size=300">300</option>
+<option value="?size=500">500</option>
+<option value="?size=2000">2000</option>
+<option value="?size=50000000">Tất cả</option>
+</select>
+</div>
+<div style=" float: right; ">
+<button onclick="tim()" class="btn btn-google btn-user btn-block"> Tìm kiếm </button>
+</div>
+<div style=" float: right; ">
+<input type="text" class="form-control" id="tukhoa" name="tukhoa" required=""  placeholder="Nhập nội dung tìm kiếm" > 
+</div>
+<div style=" float: right; ">
+<select class="form-control" id="timtheo" name="timtheo" required=""    >
+<option value="1">Tìm theo Tài khoản</option>
+<option value="2">Tìm theo ID</option>
+<option value="3">Tìm theo thời gian</option>
+</select>
+</div>
+</div>
+                            
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+								 <div class="row">
+								 <div class="col-sm-12">
+								 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+<thead>
+	<tr role="row">
+		<th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending"  >Mã</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending"   >Tài khoản</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending"  >Nội dung</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending"  >Mệnh giá</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Bạc nhận</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Trạng thái</th>
+		<th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending"  >Thời gian</th>
+	</tr>
+</thead>
+                                   <tbody id="HistoryList"></tbody>
+                                </table></div></div>
+								
+								
+							<div class="row">
+	<div class="col-sm-12 col-md-5">
+		<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">&nbsp;&nbsp;Trang <span id="current_page" ></span> trong <span id="total_page" ></span> trang - Tổng <span id="total_records" ></span></div>
+	</div>
+	<div class="col-sm-12 col-md-7">
+		<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+			<ul class="pagination" id="pagelist">
+				 
+			</ul>
+		</div>
+	</div>
+</div>
+								
+								</div>
+                            
+                       
+                    </div>
+
+                </div>
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script  src="assets/js/main.js"></script>
+
+ <script type="text/javascript">
+ 
+    var url_string = window.location.href;  
+    var url = new URL(url_string);
+    var page = url.searchParams.get("page");
+	
+	var size = url.searchParams.get("size");
+	if (size == null){var size = 10}
+	
+	var timtheo = url.searchParams.get("timtheo");
+	var tukhoa = url.searchParams.get("tukhoa");
+	if (timtheo == null){var timtheo = ""}else{document.getElementById('timtheo').value = timtheo;}
+	if (tukhoa == null){var tukhoa = ""}else{document.getElementById("tukhoa").value = tukhoa;}
+	
+function tim() {
+var timtheo = $('[name=timtheo]').val()
+var tukhoa = $('[name=tukhoa]').val()
+window.location.href = 'history-bank.html?timtheo='+timtheo+'&tukhoa='+tukhoa+'';
+}
+
+ 
+axios.post(BASE_URL + API_AUTHEN + AUTHEN_HISTORY_BANK, {
+'page': page,
+'size': size,
+'timtheo': timtheo,
+'tukhoa': tukhoa
+},
+{ headers: { 'Authorization': localStorage.getItem("Authorization"),'Content-Type': 'application/x-www-form-urlencoded'} })
+.then(function (response) {
+if (response.data.status == 1)
+{
+var obj = response.data;
+$("#total_records").html(obj.total_records);
+		$("#total_page").html(obj.total_page);
+		$("#current_page").html(obj.current_page-1);
+ 			//Hien thi danh sach users
+ 			HistoryList = obj.HistoryList
+			var pagehientai = obj.current_page;
+			var current_page_truoc = obj.current_page-2;
+			var total = obj.total_records;
+			var current_page_sau = obj.current_page-1;
+			
+			
+			
+ 			for (i = 0; i < HistoryList.length; i++) {
+ 				item = HistoryList[i]
+ 
+ 
+					$('#HistoryList').append(`<tr><td>${item['id']}</td>
+							<td>${item['name']}</td>
+							<td>${item['noidung']}</td>
+							<td>${(formatter.format(item['menhgia']))}</td>
+							<td>${(formatter.format(item['bacnhan']))}</td>
+							<td style=" color: #4CAF50; font-weight: bolder; ">${item['trangthai']}</td>
+							<td>${item['created']}</td>
+							
+						</tr>`)
+						
+						
+						
+ 			}
+			$('#pagelist').append(`<li   class="paginate_button page-item previous disabled" id="trangtruocs"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Trang trước</a></li>
+			<li style=" display: none; " class="paginate_button page-item next" id="trangtruoc"><a  href="?page=${current_page_truoc}&size=${size}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link" >Trang trước</a></li>
+			<li style=" display: none; " class="paginate_button page-item next" id="trangsau"><a href="?page=${pagehientai}&size=${size}" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link" >Trang sau</a></li>
+			<li  style=" display: none; " class="paginate_button page-item next disabled" id="trangsaus"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Trang sau</a></li>`)
+        if (obj.current_page > 2){$("#trangtruoc").show();}
+		if (obj.total_page > 0 && obj.total_page > current_page_sau){$("#trangsau").show();}
+		if (obj.current_page > 2){$("#trangtruocs").hide();}
+		if (obj.total_page == current_page_sau){$("#trangsaus").show();}
+		if (size != null){$("#showsize").show(); $("#showsize").html(size);}
+}
+else
+{
+Swal.fire({
+icon: 'error',
+title: 'Lỗi...',
+text: "" + response.data.msg + ""
+})
+}
+
+})
+.catch(function (error) {
+  console.log(error);
+});
+ 
+ 
+ 
+</script>
+</body>
+</html>

