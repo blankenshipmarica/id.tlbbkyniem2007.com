@@ -249,7 +249,7 @@ class MyHead extends HTMLElement {
 $("#check_login_off").hide();
 $("#check_login_on").show();
 const formatter = new Intl.NumberFormat('vi-VN', {maximumSignificantDigits: 3 });
-var BASE_URL = 'server/api';
+var BASE_URL = 'https://api.tlbbkyniem2007.com/server/api';
 // Authen Folder API
 var API_AUTHEN = '/user/';
 // List API
