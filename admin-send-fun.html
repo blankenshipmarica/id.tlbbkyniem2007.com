@@ -67,6 +67,7 @@
 $('form').submit(function() {
  		var admin_name = $('#admin_name').val()
  		var chon = $('#chon').val()
+		var admin_send_name = document.getElementById("name").innerText
 	 
  	 
   
@@ -171,6 +172,7 @@ swalWithBootstrapButtons.fire({
 
 //////////////////////////
 axios.post(BASE_URL + API_AUTHEN + AUTHEN_ADMIN_SEND_FUN, {
+'admin_send_name': $('[name=admin_send_name]').val(),
 'admin_name': $('[name=admin_name]').val(),
 'admin_name_to': $('[name=admin_name_to]').val(),
 'aid': $('[name=aid]').val(),
