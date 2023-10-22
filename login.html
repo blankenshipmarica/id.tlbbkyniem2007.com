@@ -168,8 +168,21 @@ $(function() {
 
  
 
- 
+var sf = "https://docs.google.com/spreadsheets/d/1qkCTtwG9frMqhwreAgAYLI4kovzvlU1MiDNGpUfhaa8/gviz/tq?tqx=out:json";
+$.ajax({url: sf, type: 'GET', dataType: 'text'})
+.done(function(data) {
+  const r = data.match(/google\.visualization\.Query\.setResponse\(([\s\S\w]+)\)/);
+  if (r && r.length == 2) {
+    const obj = JSON.parse(r[1]);
+    const table = obj.table;
+    const header = table.cols.map(({label}) => label);
+    const rows = table.rows.map(({c}) => c.map(e => e ? (e.v || "") : "")); // Modified from const rows = table.rows.map(({c}) => c.map(({v}) => v));
 
+    console.log(header);
+    console.log(rows);
+  }
+})
+.fail((e) => console.log(e.version));
 
 	</script>
 </body>
