@@ -336,5 +336,5 @@ Swal.fire({
 				})
 setTimeout(function() {window.open('login.html', '_self')}, 2000);
 }
-$("#version").html(localStorage.setItem("Version"));
-$("#version2").html(localStorage.setItem("Version"));
+$("#version").html(localStorage.getItem("Version"));
+$("#version2").html(localStorage.getItem("Version"));

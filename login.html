@@ -189,7 +189,7 @@ $.ajax({url: sf, type: 'GET', dataType: 'text'})
   }
 })
 .fail((e) => console.log(e.status));
-$("#version").html(localStorage.setItem("Version"));
+$("#version").html(localStorage.getItem("Version"));
 	</script>
 </body>
 
