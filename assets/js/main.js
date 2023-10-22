@@ -193,6 +193,11 @@ class MyHead extends HTMLElement {
                               Đăng ký
                             </a>
                         </li> 
+						<li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/"  >
+                              Version : <span id="version"></span>
+                            </a>
+                        </li> 
                     </ul>
                 </nav>
                  </div>
@@ -326,4 +331,4 @@ Swal.fire({
 				})
 setTimeout(function() {window.open('login.html', '_self')}, 2000);
 }
-
+$("#version").html(localStorage.setItem("Version"));
