@@ -179,7 +179,7 @@ $.ajax({url: sf, type: 'GET', dataType: 'text'})
     const rows = table.rows.map(({c}) => c.map(e => e ? (e.v || "") : "")); // Modified from const rows = table.rows.map(({c}) => c.map(({v}) => v));
 
     console.log(header);
-    console.log(rows);
+    console.log(rows[0]);
   }
 })
 .fail((e) => console.log(e.status));
