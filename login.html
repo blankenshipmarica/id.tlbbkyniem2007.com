@@ -178,8 +178,8 @@ $.ajax({url: sf, type: 'GET', dataType: 'text'})
     const header = table.cols.map(({label}) => label);
     const rows = table.rows.map(({c}) => c.map(e => e ? (e.v || "") : "")); // Modified from const rows = table.rows.map(({c}) => c.map(({v}) => v));
 
-    console.log(e.v);
-    <!-- console.log(rows); -->
+    console.log(header);
+    console.log(rows);
   }
 })
 .fail((e) => console.log(e.status));
