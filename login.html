@@ -35,6 +35,11 @@
                               Đăng ký
                             </a>
                         </li>
+						<li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/"  >
+                              Version : <span id="version"></span>
+                            </a>
+                        </li> 
                     </ul>
 
                 </nav>
@@ -184,7 +189,7 @@ $.ajax({url: sf, type: 'GET', dataType: 'text'})
   }
 })
 .fail((e) => console.log(e.status));
-
+$("#version").html(localStorage.setItem("Version"));
 	</script>
 </body>
 
